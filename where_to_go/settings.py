@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 
 from pathlib import Path
 from environs import Env
@@ -60,10 +61,12 @@ WSGI_APPLICATION = 'where_to_go.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+DATABASE_URL = env.str('DATABASE_URL', None)
+if DATABASE_URL:
+    DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
 
 AUTH_PASSWORD_VALIDATORS = [
     {
