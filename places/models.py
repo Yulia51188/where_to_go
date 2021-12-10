@@ -25,7 +25,6 @@ class Place(models.Model):
     latitude = models.FloatField('Широта')
     longitude = models.FloatField('Долгота')
     slug = models.SlugField('Идентификатор места')
-    details = models.FileField('Путь к файлу с описанием')
 
     def __str__(self):
         return f'{self.title} ({self.longitude}, {self.latitude})'
