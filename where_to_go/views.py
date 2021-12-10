@@ -10,8 +10,8 @@ def serialize_place(place):
             "coordinates": [place.longitude, place.latitude],
         },
         "properties": {
-            "title": place.place_id,
-            "placeId": place.place_id,
+            "title": place.title,
+            "placeId": place.slug,
             "detailsUrl": place.details.url,
         }
     }
