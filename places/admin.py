@@ -25,6 +25,7 @@ class PlaceAdmin(admin.ModelAdmin):
     inlines = [
         PlacePhotoInline,
     ]
+    search_fields = ['title']
 
 
 admin.site.register(Place, PlaceAdmin)
