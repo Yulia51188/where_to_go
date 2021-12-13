@@ -29,3 +29,6 @@ class Place(models.Model):
 
     def __str__(self):
         return f'{self.title} ({self.longitude}, {self.latitude})'
+
+    class Meta():
+        unique_together = [['title', 'slug', 'latitude', 'longitude']]
