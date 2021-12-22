@@ -23,6 +23,7 @@ class PlacePhotoInline(SortableInlineAdminMixin, admin.TabularInline):
         )
 
 
+@admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
     inlines = [
         PlacePhotoInline,
@@ -31,5 +32,6 @@ class PlaceAdmin(admin.ModelAdmin):
     list_display = ['title', 'slug']
 
 
-admin.site.register(Place, PlaceAdmin)
-admin.site.register(PlacePhoto)
+@admin.register(PlacePhoto)
+class PlacePhotoAdmin(admin.ModelAdmin):
+    pass
