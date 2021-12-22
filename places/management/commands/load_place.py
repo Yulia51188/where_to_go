@@ -14,22 +14,13 @@ def parse_filename(url):
     return os.path.basename(file_path)
 
 
-def load_place(place_url):
-    response = requests.get(place_url)
-    response.raise_for_status()
-    return response.json()
-
-
-def read_file(file_path):
-    with open(file_path, 'r') as file_obj:
-        content = file_obj.read()
-    return json.loads(content)
-
-
 def load_places(folder_path):
     places_paths = [os.path.join(folder_path, filename)
                     for filename in os.listdir(folder_path)]
-    places = [read_file(file_path) for file_path in places_paths]
+    places = []
+    for file_path in places_paths:                
+        with open(file_path, 'r') as file_obj:
+            places.append(json.load(file_obj))
     return places
 
 
@@ -92,5 +83,7 @@ class Command(BaseCommand):
                 print(place)
                 create_place_entity(place, options['place_slug'])
         else:
-            place = load_place(options['file_url'])
+            response = requests.get(options['file_url'])
+            response.raise_for_status()
+            place = response.json()
             create_place_entity(place, options['place_slug'])
