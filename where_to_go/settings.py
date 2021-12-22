@@ -12,9 +12,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = env.str('SECRET_KEY', default='test_secret_key')
 
-DEBUG = env.bool('DEBUG', default=True)
+DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
+print(f'ALLOWED_HOSTS {ALLOWED_HOSTS}')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
