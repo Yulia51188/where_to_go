@@ -65,7 +65,7 @@ $ python manage.py load_place "https://raw.githubusercontent.com/devmanorg/where
 Если данное место уже существует, то картинки по ссылкам полностью обновятся.
 
 Пример файла:
-```
+```json
 {
     "title": "Антикафе Bizone",
     "imgs": [
