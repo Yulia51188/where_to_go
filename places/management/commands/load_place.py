@@ -80,7 +80,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument('file_url', type=str)
-        parser.add_argument('--place_slug', type=str, default='place')
+        parser.add_argument('place_slug', type=str)
         parser.add_argument('-f', '--load_from_folder', action='store_true')
 
     def handle(self, *args, **options):

@@ -25,7 +25,7 @@ class Place(models.Model):
     description_long = HTMLField('Подробное описание', blank=True)
     latitude = models.FloatField('Широта')
     longitude = models.FloatField('Долгота')
-    slug = models.SlugField('Идентификатор места')
+    slug = models.SlugField('Идентификатор места', unique=True)
 
     def __str__(self):
         return f'{self.title} ({self.longitude}, {self.latitude})'
