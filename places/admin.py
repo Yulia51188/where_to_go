@@ -34,4 +34,4 @@ class PlaceAdmin(admin.ModelAdmin):
 
 @admin.register(PlacePhoto)
 class PlacePhotoAdmin(admin.ModelAdmin):
-    pass
+    list_filter = ['place']

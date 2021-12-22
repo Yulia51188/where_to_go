@@ -28,7 +28,7 @@ class Place(models.Model):
     slug = models.SlugField('Идентификатор места', unique=True)
 
     def __str__(self):
-        return f'{self.title} ({self.longitude}, {self.latitude})'
+        return f'{self.title} #{self.slug}'
 
     class Meta():
         unique_together = [['title', 'slug', 'latitude', 'longitude']]
