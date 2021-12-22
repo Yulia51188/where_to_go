@@ -36,11 +36,13 @@ def load_places(folder_path):
 def create_place_entity(place, slug):    
     place_entity, created = Place.objects.get_or_create(
         title=place['title'],
-        description_short=place['description_short'],
-        description_long=place['description_long'],
         latitude=place['coordinates']['lat'],
         longitude=place['coordinates']['lng'],
         slug=slug,
+        defaults={
+            'description_short': place['description_short'],
+            'description_long': place['description_long'],
+        }
     )
 
     place_photos = place_entity.photos.all()
