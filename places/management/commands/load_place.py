@@ -48,17 +48,12 @@ def upload_photos(photo_urls, place):
         response = requests.get(photo_url)
         response.raise_for_status()
 
-        place_photos = PlacePhoto.objects.filter(place=place)
-
-        if not place_photos.exists():
-            last_index = 0
-        else:
-            last_index = (place_photos.order_by('-index'))[0].index
+        place_photos_count = PlacePhoto.objects.filter(place=place).count()
         
         photo = ContentFile(response.content)
-        new_photo, created = PlacePhoto.objects.get_or_create(
+        new_photo = PlacePhoto.objects.create(
             place=place,
-            index=last_index + 1,
+            index=place_photos_count + 1,
         )
 
         new_photo.image.save(
