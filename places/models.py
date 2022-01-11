@@ -4,7 +4,7 @@ from tinymce.models import HTMLField
 
 class PlacePhoto(models.Model):
     image = models.ImageField('Фотография')
-    index = models.IntegerField('Порядковый номер', blank=True, null=True)
+    index = models.IntegerField('Порядковый номер', blank=True, default=0)
     place = models.ForeignKey(
         'Place',
         verbose_name='Место',
