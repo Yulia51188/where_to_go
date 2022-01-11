@@ -40,27 +40,25 @@ def create_place_entity(place, slug):
     if place_photos.exists():
         place_photos.delete()
 
-    upload_photos(place['imgs'], place_entity)
+    for photo_url in place['imgs']:
+        upload_photo(photo_url, place_entity)
 
 
-def upload_photos(photo_urls, place):
-    for photo_url in photo_urls:
-        response = requests.get(photo_url)
-        response.raise_for_status()
-
-        place_photos_count = PlacePhoto.objects.filter(place=place).count()
-        
-        photo = ContentFile(response.content)
-        new_photo = PlacePhoto.objects.create(
-            place=place,
-            index=place_photos_count + 1,
-        )
-
-        new_photo.image.save(
-            parse_filename(photo_url),
-            photo,
-            save=True
-        )
+def upload_photo(photo_url, place):
+    response = requests.get(photo_url)
+    response.raise_for_status()
+    place_photos_count = PlacePhoto.objects.filter(place=place).count()
+    
+    photo = ContentFile(response.content)
+    new_photo = PlacePhoto.objects.create(
+        place=place,
+        index=place_photos_count + 1,
+    )
+    new_photo.image.save(
+        parse_filename(photo_url),
+        photo,
+        save=True
+    )
 
 
 class Command(BaseCommand):
